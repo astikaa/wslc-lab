@@ -30,8 +30,8 @@ Test environment: WSL 3.0.1.0 / Kernel 6.18.40.1-1 / WSLC 3.0.1.0
 | Custom WSLC networks | PASS |
 | Container-to-container networking/DNS | PASS |
 | Dockerfile build | PASS |
-| GPU passthrough | NOT TESTED |
-| CPU/memory limits | NOT TESTED |
+| GPU passthrough | PARTIAL PASS — `/dev/dxg` + WSL GPU libraries injected; hardware Vulkan not established |
+| CPU/memory limits | PASS — CPU throttling and memory cgroup enforcement verified |
 | Performance | NOT TESTED |
 | Docker Compose compatibility | NOT TESTED |
 | Docker Engine API compatibility | NOT TESTED |
@@ -86,3 +86,28 @@ Detailed evidence: `docs/VALIDATION-WSLC-PHASE-2.md`
 | Complete Docker/BuildKit compatibility | NOT CLAIMED |
 
 Detailed evidence: `docs/VALIDATION-WSLC-PHASE-3-BUILD.md`
+
+## Phase 4 — Resource Limits and GPU
+
+| Capability | Result |
+|---|---|
+| `--cpus` configuration | PASS |
+| cgroup v2 CPU quota | PASS |
+| CPU throttling under contention | PASS |
+| `--memory` configuration | PASS |
+| cgroup v2 `memory.max` | PASS |
+| Memory pressure accounting | PASS |
+| Anonymous allocation below limit | PASS |
+| Swap use under memory pressure | OBSERVED |
+| Independent swap ceiling | NOT ESTABLISHED |
+| Default GPU isolation | PASS |
+| `--gpus all` | PASS |
+| `/dev/dxg` injection | PASS |
+| WSL D3D12/DXCore library injection | PASS |
+| Vulkan userspace initialization | PASS |
+| Hardware Vulkan acceleration | NOT ESTABLISHED |
+| Observed Vulkan device | llvmpipe CPU |
+| NVIDIA/CUDA validation | NOT APPLICABLE |
+| Phase 4 resource cleanup | PASS |
+
+Detailed evidence: `docs/VALIDATION-WSLC-PHASE-4-RESOURCES-GPU.md`
