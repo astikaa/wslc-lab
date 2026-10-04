@@ -35,3 +35,27 @@ Test environment: WSL 3.0.1.0 / Kernel 6.18.40.1-1 / WSLC 3.0.1.0
 | Performance | NOT TESTED |
 | Docker Compose compatibility | NOT TESTED |
 | Docker Engine API compatibility | NOT TESTED |
+
+## Phase 2 — Managed Volumes and Networking
+
+| Capability | Result |
+|---|---|
+| WSLC managed volume creation | PASS |
+| Default `guest` volume driver | PASS |
+| Volume inspect | PASS |
+| Volume persistence after writer destruction | PASS |
+| Cross-container volume read | PASS |
+| Cross-container volume mutation | PASS |
+| Explicit volume deletion lifecycle | PASS |
+| Custom WSLC bridge network | PASS |
+| Automatic IPv4 IPAM | PASS |
+| Container-name DNS | PASS |
+| Container-to-container HTTP by name | PASS |
+| Container-to-container HTTP by IP | PASS |
+| Network alias DNS | PASS |
+| HTTP by network alias | PASS |
+| Default bridge → custom-network DNS | NOT REACHABLE (tested topology) |
+| Default bridge → custom-network direct IP | NOT REACHABLE / TIMEOUT (tested topology) |
+| Phase 2 resource cleanup | PASS |
+
+Detailed evidence: `docs/VALIDATION-WSLC-PHASE-2.md`
