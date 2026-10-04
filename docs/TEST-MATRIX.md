@@ -33,8 +33,8 @@ Test environment: WSL 3.0.1.0 / Kernel 6.18.40.1-1 / WSLC 3.0.1.0
 | GPU passthrough | PARTIAL PASS — `/dev/dxg` + WSL GPU libraries injected; hardware Vulkan not established |
 | CPU/memory limits | PASS — CPU throttling and memory cgroup enforcement verified |
 | Performance | NOT TESTED |
-| Docker Compose compatibility | NOT TESTED |
-| Docker Engine API compatibility | NOT TESTED |
+| Docker Compose compatibility | PARTIAL PASS — external Compose works against the WSLC Docker Engine; no native `wslc compose` command |
+| Docker Engine API compatibility | PASS — tested subset through the internal Docker socket/API |
 
 ## Phase 2 — Managed Volumes and Networking
 
@@ -111,3 +111,36 @@ Detailed evidence: `docs/VALIDATION-WSLC-PHASE-3-BUILD.md`
 | Phase 4 resource cleanup | PASS |
 
 Detailed evidence: `docs/VALIDATION-WSLC-PHASE-4-RESOURCES-GPU.md`
+
+## Phase 5 — Docker Compose Compatibility
+
+| Capability | Result |
+|---|---|
+| Native `wslc compose` command | NOT AVAILABLE |
+| Compose plugin in WSLC internal Docker CLI | NOT AVAILABLE |
+| Internal WSLC Docker Engine | PASS |
+| Internal `/var/run/docker.sock` | PASS |
+| Docker Engine API access | PASS |
+| External Compose client → WSLC Engine | PASS |
+| Compose config parsing | PASS |
+| Multi-service `compose up -d` | PASS |
+| Compose-created custom network | PASS |
+| Service-name DNS | PASS |
+| Container-to-container HTTP | PASS |
+| Compose named volume | PASS |
+| Volume write/read | PASS |
+| Service reconciliation after manual container removal | PASS |
+| Named-volume persistence after container recreation | PASS |
+| `compose down` container cleanup | PASS |
+| `compose down` network cleanup | PASS |
+| Named volume retained by `compose down` | PASS |
+| Named-volume persistence after full stack recreation | PASS |
+| `compose down -v` volume cleanup | PASS |
+| Compose resources visible through Docker API | PASS |
+| Compose-created containers visible in `wslc list` | NO |
+| WSLC metadata marker on WSLC-created container | OBSERVED |
+| Full native WSLC Compose integration | NOT ESTABLISHED |
+| Complete Docker Compose compatibility | NOT CLAIMED |
+| Phase 5 resource cleanup | PASS |
+
+Detailed evidence: `docs/VALIDATION-WSLC-PHASE-5-COMPOSE.md`
