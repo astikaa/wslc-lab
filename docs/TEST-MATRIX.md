@@ -26,10 +26,10 @@ Test environment: WSL 3.0.1.0 / Kernel 6.18.40.1-1 / WSLC 3.0.1.0
 | NTFS bidirectional read/write | PASS |
 | Ubuntu filesystem bind mount | PASS |
 | Ubuntu filesystem bidirectional read/write | PASS |
-| WSLC managed volumes | NOT TESTED |
-| Custom WSLC networks | NOT TESTED |
-| Container-to-container networking/DNS | NOT TESTED |
-| Dockerfile build | NOT TESTED |
+| WSLC managed volumes | PASS |
+| Custom WSLC networks | PASS |
+| Container-to-container networking/DNS | PASS |
+| Dockerfile build | PASS |
 | GPU passthrough | NOT TESTED |
 | CPU/memory limits | NOT TESTED |
 | Performance | NOT TESTED |
@@ -59,3 +59,30 @@ Test environment: WSL 3.0.1.0 / Kernel 6.18.40.1-1 / WSLC 3.0.1.0
 | Phase 2 resource cleanup | PASS |
 
 Detailed evidence: `docs/VALIDATION-WSLC-PHASE-2.md`
+
+## Phase 3 — Native Dockerfile Build
+
+| Capability | Result |
+|---|---|
+| Native `wslc build` | PASS |
+| Dockerfile `FROM` / `RUN` | PASS |
+| Local image creation and tagging | PASS |
+| Run locally built image | PASS |
+| Image inspect | PASS |
+| BuildKit Dockerfile frontend | OBSERVED |
+| Windows build context | PASS |
+| `COPY` | PASS |
+| `ARG` / `--build-arg` | PASS |
+| `ARG` → `ENV` persistence | PASS |
+| `WORKDIR` | PASS |
+| Build cache reuse | PASS |
+| Build-context cache invalidation | PASS |
+| Previous image remains independently runnable | PASS |
+| Multi-stage build | PASS |
+| `COPY --from` | PASS |
+| Default final-stage selection | PASS |
+| `--target` named stage | PASS |
+| `.dockerignore` | PASS |
+| Complete Docker/BuildKit compatibility | NOT CLAIMED |
+
+Detailed evidence: `docs/VALIDATION-WSLC-PHASE-3-BUILD.md`
